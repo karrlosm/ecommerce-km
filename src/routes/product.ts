@@ -6,7 +6,7 @@ import { ProductErrors, UserErrors } from '../errors';
 
 const router = Router();
 
-router.get('/', verifyToken, async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
 
     try {
         const products = await ProductModel.find({})
@@ -22,7 +22,6 @@ router.post('/checkout', verifyToken, async (req: Request, res: Response) => {
 
     try {
         const user = await UserModel.findById(customerID);
-
         const productIDs = Object.keys(cartItems);
         const products = await ProductModel.find({ _id: { $in: productIDs }});
 
